@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // 追加：ページ移動のための道具
 import { io, Socket } from 'socket.io-client';
-import { SystemStatus, UserRole } from '@/types/types';
+import { SystemStatus, UserRole } from '../types/types';
 
 const socket: Socket = io(); // 引数を空にすると、自分自身(localhost:3000)に繋ぎにいきます
 export default function Home() {
