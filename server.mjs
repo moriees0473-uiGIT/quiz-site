@@ -4,7 +4,11 @@ import { Server } from "socket.io";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000;
+
+// 修正前: const port = 3000;
+// const port = 3000;
+// 修正後: Renderなどの環境変数を優先し、なければ3000を使う
+const port = process.env.PORT || 3000;
 
 // Next.jsを初期化
 const app = next({ dev, hostname, port });
