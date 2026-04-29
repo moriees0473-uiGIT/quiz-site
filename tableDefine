@@ -1,0 +1,35 @@
+
+DROP TABLE users;
+DROP TABLE logs;
+DROP TABLE quizzes;
+DROP TABLE quiz_responses;
+
+    -- ユーザーテーブル
+    CREATE TABLE users (uuid TEXT PRIMARY KEY, student_number TEXT NOT NULL, class TEXT NOT NULL, created_at TEXT NOT NULL);
+    
+    -- ログ
+    CREATE TABLE logs (id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT NOT NULL, user_type TEXT NOT NULL, user_id TEXT, class TEXT, action TEXT NOT NULL, details TEXT, ip_address TEXT);
+    
+    -- クイズマスタ
+    CREATE TABLE quizzes (
+      quiz_id TEXT PRIMARY KEY, 
+      category TEXT, 
+      question_text TEXT, 
+      option_a TEXT, option_b TEXT, option_c TEXT, option_d TEXT, 
+      correct_answer TEXT, points INTEGER
+    );
+
+    --  回答記録（トランザクション用）
+    CREATE TABLE quiz_responses (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, 
+      timestamp TEXT NOT NULL, 
+      uuid TEXT NOT NULL, 
+      student_number TEXT NOT NULL, 
+      class TEXT NOT NULL, 
+      quiz_id TEXT NOT NULL, 
+      answer TEXT NOT NULL, 
+      is_correct INTEGER
+    );
+
+node create_quizzes_table.mjs
+
