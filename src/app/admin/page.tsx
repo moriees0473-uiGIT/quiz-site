@@ -47,8 +47,9 @@ export default function AdminPage() {
       // --- クイズデータのバリデーション ---
       if (importTarget === "quiz") {
         const requiredCols = ["quiz_id", "question_text", "option_a", "option_b", "option_c", "option_d", "correct_answer", "points"];
-        const first = jsonData[0] || {};
-        const missing = requiredCols.filter(col => !(col in first));
+        const first = jsonData[0];
+        const isObject = typeof first === "object" && first !== null;
+        const missing = isObject ? requiredCols.filter(col => !(col in first)) : requiredCols;
         if (missing.length > 0) {
           alert("不足している列: " + missing.join(", "));
           e.target.value = "";
